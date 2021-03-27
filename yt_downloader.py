@@ -5,11 +5,6 @@ import os
 import subprocess
 import datetime
 
-# If certificate error: navigate to python-version file, click install certificates
-# python-version yt_downloader (works best with python3)
-# pip install pytube
-# pip install moviepy
-
 # Main loop:
 loop = True
 while loop:
@@ -39,23 +34,23 @@ while loop:
                     # Grab highest possible progressive stream (mp4 file - 720p max).
                     high_res_va = yt.streams.get_highest_resolution()
 
-                    # Download mp4 to Desktop folder.
+                    # Download mp4.
                     print('Downloading...')
-                    mp4_path = high_res_va.download('/Users/yoon/Desktop')
-                    print('Download complete! Saved to Desktop folder.\n')
+                    mp4_path = high_res_va.download()
+                    print('Download complete!.\n')
 
-                    # Open mp4 with Transcribe!
-                    tr_loop = True
-                    while tr_loop:
-                        transcribe = input("Open file with Transcribe!? - 'y' or 'n': ")
-                        if transcribe == 'y':
-                            # Apps require executable path rather than directory path, like below.
-                            path_to_Transcribe = '/Applications/Transcribe!.app/Contents/MacOS/Transcribe!'
-                            # arg[0] = program to run, arg[1,etc.] = writes onto arg[0].
-                            subprocess.call([path_to_Transcribe, mp4_path])
-                            break
-                        elif transcribe == 'n':
-                            break
+                    # # Open mp4 with Transcribe!
+                    # tr_loop = True
+                    # while tr_loop:
+                    #     transcribe = input("Open file with Transcribe!? - 'y' or 'n': ")
+                    #     if transcribe == 'y':
+                    #         # Apps require executable path rather than directory path, like below.
+                    #         path_to_Transcribe = '/Applications/Transcribe!.app/Contents/MacOS/Transcribe!'
+                    #         # arg[0] = program to run, arg[1,etc.] = writes onto arg[0].
+                    #         subprocess.call([path_to_Transcribe, mp4_path])
+                    #         break
+                    #     elif transcribe == 'n':
+                    #         break
 
                     # Back to Main.
                     dl_loop = False
@@ -65,7 +60,7 @@ while loop:
                     # Download mp4 first.
                     high_res_va = yt.streams.get_highest_resolution()
                     print('Downloading', yt.title + '.mp4...')
-                    mp4_path = high_res_va.download('/Users/yoon/Desktop')
+                    mp4_path = high_res_va.download()
                     print(yt.title + '.mp4 complete.\n')
 
                     # Convert mp4 to mp3.
@@ -77,24 +72,24 @@ while loop:
                     videoclip.close()
                     audioclip.close()
 
-                    # Change location to Desktop folder (moviepy writes to current directory).
-                    mp3_final = shutil.move('/Users/yoon/Dev/yt-downloader/' + mp3_filename,
-                        '/Users/yoon/Desktop/' + mp3_filename)
-                    print('Audio saved to Desktop folder.\n')
+                    # # Change location to Desktop folder (moviepy writes to current directory).
+                    # mp3_final = shutil.move('/Users/yoon/Dev/yt-downloader/' + mp3_filename,
+                    #     '/Users/yoon/Desktop/' + mp3_filename)
+                    # print('Audio saved to Desktop folder.\n')
 
                     # Delete mp4 file.
                     os.remove(mp4_path)
 
-                    # Open mp3 with Transcribe!.
-                    tr_loop = True
-                    while tr_loop:
-                        transcribe = input("Open file with Transcribe!? - 'y' or 'n': ")
-                        if transcribe == 'y':
-                            path_to_Transcribe = '/Applications/Transcribe!.app/Contents/MacOS/Transcribe!'
-                            subprocess.call([path_to_Transcribe, mp3_final])
-                            break
-                        elif transcribe == 'n':
-                            break
+                    # # Open mp3 with Transcribe!.
+                    # tr_loop = True
+                    # while tr_loop:
+                    #     transcribe = input("Open file with Transcribe!? - 'y' or 'n': ")
+                    #     if transcribe == 'y':
+                    #         path_to_Transcribe = '/Applications/Transcribe!.app/Contents/MacOS/Transcribe!'
+                    #         subprocess.call([path_to_Transcribe, mp3_final])
+                    #         break
+                    #     elif transcribe == 'n':
+                    #         break
 
                     # Back to Main.
                     dl_loop = False
@@ -139,8 +134,8 @@ while loop:
                                     # Download mp4 to Desktop folder.
                                     print('')
                                     print('Downloading', v.title + '...')
-                                    mp4 = high_res_va.download('/Users/yoon/Desktop')
-                                    print('Download complete! Saved to Desktop folder.\n')
+                                    mp4 = high_res_va.download()
+                                    print('Download complete!.\n')
 
                                     # Back to Main.
                                     no_q_loop = False
@@ -154,7 +149,7 @@ while loop:
                                     high_res_va = v.streams.get_highest_resolution()
                                     print('')
                                     print('Downloading', v.title + '.mp4...')
-                                    mp4_path = high_res_va.download('/Users/yoon/Desktop')
+                                    mp4_path = high_res_va.download()
                                     print(v.title + '.mp4 complete.\n')
 
                                     # Convert mp4 to mp3.
@@ -166,10 +161,10 @@ while loop:
                                     videoclip.close()
                                     audioclip.close()
 
-                                    # Change location to Desktop folder.
-                                    mp3_final = shutil.move('/Users/yoon/Dev/yt-downloader/' + mp3_filename,
-                                        '/Users/yoon/Desktop/' + mp3_filename)
-                                    print('Audio saved to Temp Items folder.\n')
+                                    # # Change location to Desktop folder.
+                                    # mp3_final = shutil.move('/Users/yoon/Dev/yt-downloader/' + mp3_filename,
+                                    #     '/Users/yoon/Desktop/' + mp3_filename)
+                                    # print('Audio saved to Temp Items folder.\n')
 
                                     # Delete mp4 file.
                                     os.remove(mp4_path)
